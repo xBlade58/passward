@@ -1,2 +1,2 @@
 # passward
-Project Password Manger in the course Desktop Web Apps
+Project Password Manager in the course Desktop Web Apps
