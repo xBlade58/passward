@@ -1,0 +1,22 @@
+{
+  "name": "passward",
+  "version": "1.0.0",
+  "description": "Password Manager",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xBlade58/passward.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xBlade58/passward/issues"
+  },
+  "homepage": "https://github.com/xBlade58/passward#readme",
+  "devDependencies": {
+    "electron": "^22.0.0"
+  }
+}
