@@ -17,9 +17,4 @@ export interface Tile {
 export class AppComponent {
   title = 'PassWard';
 
-  tils: Tile[] = [
-    {text: 'One', cols: 1, rows: 1, color: 'lightblue', borderColor: 'black'},
-    {text: 'Two', cols: 1, rows: 1, color: 'lightgreen', borderColor: 'black'},
-
-  ];
 }
