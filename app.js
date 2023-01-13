@@ -1,6 +1,7 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron')
     const url = require("url");
     const path = require("path");
+    const fs = require("fs");
 
     let mainWindow
 
@@ -9,6 +10,7 @@ const {app, BrowserWindow} = require('electron')
         width: 800,
         height: 600,
         webPreferences: {
+          contextIsolation: false, //https://stackoverflow.com/questions/61021885/electron-window-require-is-not-a-function-even-with-nodeintegration-set-to-true
           nodeIntegration: true
         }
       })
@@ -36,4 +38,20 @@ const {app, BrowserWindow} = require('electron')
 
     app.on('activate', function () {
       if (mainWindow === null) createWindow()
+    })
+
+    ipcMain.on( 'openFile', (title) => {
+      fs.readFile('test-json.json', 'utf8', function (err, data){
+        mainWindow.webContents.send("openFileResponse", data)
+      })
+    })
+
+    ipcMain.on( 'savePassword', (event, obj) => {
+      if(obj){
+        fs.writeFile('test-json.json', JSON.stringify(obj), function(err){
+          if (err) {
+            console.error(err);
+          }
+        })
+      }
     })

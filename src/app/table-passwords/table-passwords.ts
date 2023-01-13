@@ -1,4 +1,4 @@
-import { Component, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table'
@@ -16,7 +16,6 @@ export class TablePassword {
   dataSource: MatTableDataSource<PasswordData>;
   selectedChips: string[] = [];
   tags= ['University', 'Games', 'Streaming', 'Entertainment'];
-
 
 
   @ViewChild(MatSort)
@@ -39,10 +38,6 @@ export class TablePassword {
 
   }
 
-  /**
-   * Set the sort after the view init since this component will
-   * be able to query its view for the initialized paginator and sort.
-   */
   ngAfterViewInit() {
     this.dataSource.sort=this.sort;
   }
@@ -77,6 +72,7 @@ export class TablePassword {
   getFilterPredicate(){
     console.log('Doing predicate..')
     return (data: PasswordData, filter: string) => {
+      //TODO: consider filter:string as well
       const incl = this.selectedChips.includes(data.tag);
       return incl;
     }

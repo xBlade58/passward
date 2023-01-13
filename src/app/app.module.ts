@@ -7,17 +7,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { TablePassword } from './table-passwords/table-passwords';
+import { FormsModule } from '@angular/forms';
 
 import {MatSortModule} from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule }  from '@angular/material/chips';
-
+import { MatIconModule } from '@angular/material/icon'
+import { DetailView } from './detail-view/detail-view';
+import { CreateCredentialView } from './create-credential-view/create-credential-view';
 
 @NgModule({
   declarations: [
-    AppComponent, TablePassword
+    AppComponent, TablePassword, DetailView, CreateCredentialView
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,9 @@ import { MatChipsModule }  from '@angular/material/chips';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    MatChipsModule
+    MatChipsModule,
+    MatIconModule,
+    FormsModule
   ],
   exports: [
     MatFormFieldModule,
