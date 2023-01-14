@@ -1,5 +1,6 @@
 import {Component, Output, EventEmitter, ChangeDetectorRef, ElementRef, ViewChild} from '@angular/core';
 import { NgForm,  } from '@angular/forms';
+import { Router } from '@angular/router';
 import {v4 as uuidv4} from 'uuid';
 import { Password } from './Password';
 
@@ -11,7 +12,7 @@ const electron =(<any>window).require('electron');
   styleUrls: ['create-credential.css'],
   templateUrl: 'create-credential.html',
 })
-export class CreateCredentialView {
+export class CreateCredential {
   hide=true;
   loading=false;
 
@@ -27,7 +28,7 @@ export class CreateCredentialView {
     el.click();
   }
 
-  constructor(){
+  constructor(private router: Router){
     this.registerListener()
   }
 
@@ -70,14 +71,15 @@ export class CreateCredentialView {
     this.loading = true;
   }
 
-  navToMain(){
-    this.navToMainEvent.emit();
+  cancel(){
+    this.router.navigate(['']);
   }
 
   registerListener(){
 
     electron.ipcRenderer.on('storage:passwordSaved', () => {
-      this.navToMain()
+      this.loading = false;
+      this.router.navigate([''])
     })
   }
 

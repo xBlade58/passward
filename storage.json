@@ -1,1 +1,18 @@
-[{"id":"009c8a6c-968b-48b9-9c62-403fb0868edb","title":"fdsa","username":"adf","password":"adf","url":"adf","tag":"asdf"},{"id":"228c32d0-9a81-416e-9c25-863c34d6ea31","title":"fsd","username":"sdf","password":"asdf","url":"asdf","tag":"asdf"},{"id":"e09686a8-8d9a-4dcd-ac0f-e56031ef0368","title":"fadsf","username":"adsf","password":"adfs","url":"asdf","tag":"asdf"},{"id":"06cfde86-9d9c-4584-bbc1-ce992b24fa15","title":"adsf","username":"sdf","password":"asdf","url":"asdf","tag":"adsf"},{"id":"8e66cbc9-c232-482a-8265-014a1ef81df1","title":"sdfsa","username":"asdf","password":"asdf","url":"asdf","tag":"asdf"},{"id":"8985bc70-bbba-4ce8-b7f0-e45526218d7f","title":"adfs","username":"df","password":"adsf","url":"asdf","tag":"adsf"},{"id":"e1d4a949-fdec-448f-8903-66d5da5f8ff2","title":"asd","username":"aadf","password":"asdf","url":"adsf","tag":"asdf"},{"id":"e5a231b0-697d-4ab5-9a71-9d81b95dddf0","title":"asdf","username":"asdf","password":"asdfasdf","url":"adsf","tag":"adsf"},{"id":"08ac8df7-fed2-47d9-94b7-3502c7b3655c","title":"afdsf","username":"asdf","password":"asdf","url":"asdf","tag":"asdf"},{"id":"b98c855d-05af-4ebe-8cdf-51667d1c1876","title":"asdf","username":"asdf","password":"adsf","url":"adsf","tag":"asdf"},{"id":"7a797cd1-c986-45fe-bf06-520e41e3a5d2","title":"fasdf","username":"asdf","password":"asdf","url":"asdf","tag":"asdf"},{"id":"98f74989-2425-4cf3-bdbe-f721b99c8c83","title":"fasd","username":"asdfa","password":"asfd","url":"asdf","tag":"asdf"},{"id":"c451f208-f4ae-4b71-ae4b-e6533fdb1099","title":"adfs","username":"asdf","password":"adf","url":"adsf","tag":"adsf"},{"id":"283fe0b1-52ee-4e38-a6a4-c78e21115a01","title":"adf","username":"adf","password":"adf","url":"adf","tag":"afd"},{"id":"4f2bdbb1-33b8-468a-a217-c73d4a1076ff","title":"asdf","username":"aasdf","password":"asdf","url":"asdf","tag":"dsf"},{"id":"533473b3-f954-47ba-bdd8-62af0021db0d","title":"fsda","username":"asdf","password":"adf","url":"adsf","tag":"adsf"},{"id":"5a179181-b6ea-4121-b6c4-6de6f3967b51","title":"fsda","username":"asdf","password":"asdf","url":"adf","tag":"adsf"},{"id":"e2b43922-e796-438d-ad9e-cec3e84188a5","title":"fds","username":"dsf","password":"asdf","url":"asdf","tag":"asdf"},{"id":"496da4b4-6dc2-4585-8cbe-ea26e2eea2f3","title":"aa","username":"a","password":"a","url":"a","tag":"a"},{"id":"eb4fa239-b1ff-429e-a01a-0872405d1ab4","title":"sdfdsf","username":"dff","password":"f","url":"f","tag":"f"},{"id":"7cc5f920-1172-4139-bf67-f0d2469e2986","title":"jjj","username":"j","password":"j","url":"j","tag":"j"}]
+[
+  {
+    "id": "523b9ffc-b9c1-4f26-81e1-acb67c4b01bd",
+    "title": "spotify-newnew",
+    "username": "mert",
+    "password": "mert",
+    "url": "spotify.com",
+    "tag": "music"
+  },
+  {
+    "id": "33db61e3-f5f3-4462-96d2-119fb853c3b2",
+    "title": "netflix",
+    "username": "jakob",
+    "password": "hahaahh",
+    "url": "netflix.com",
+    "tag": "streaming"
+  }
+]

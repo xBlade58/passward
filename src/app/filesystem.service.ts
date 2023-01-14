@@ -9,8 +9,17 @@ const electron = (<any>window).require('electron');
 })
 export class FileSystemService {
 
+
   constructor(){
 
+  }
+
+
+  async loadPasswordById(id: string): Promise<string> {
+    return electron.ipcRenderer.invoke('storage:fetchById', id)
+      .then((response:any) => {
+        return response;
+      });
   }
 
   loadCrendentials(): Observable<Password[]>{
@@ -30,5 +39,9 @@ export class FileSystemService {
     })
 
     return of(res);
+  }
+
+  async editCredentialById(toUpdate: any): Promise<void> {
+    return electron.ipcRenderer.invoke('storage:editById', toUpdate)
   }
 }

@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 import { TablePassword } from './table-passwords/table-passwords';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditCredential } from './edit-credential/edit-credential';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
@@ -17,11 +17,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule }  from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon'
-import { CreateCredentialView } from './create-credential/create-credential';
+import { CreateCredential } from './create-credential/create-credential';
 
 @NgModule({
   declarations: [
-    AppComponent, TablePassword, CreateCredentialView, EditCredential
+    AppComponent, TablePassword, CreateCredential, EditCredential
   ],
   imports: [
     BrowserModule,
@@ -35,7 +35,8 @@ import { CreateCredentialView } from './create-credential/create-credential';
     MatChipsModule,
     MatIconModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatFormFieldModule,

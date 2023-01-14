@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TablePassword } from './table-passwords/table-passwords';
-import {CreateCredentialView} from './create-credential/create-credential';
+import {CreateCredential} from './create-credential/create-credential';
+import { EditCredential } from './edit-credential/edit-credential';
 
 const routes: Routes = [
   {path: '', component: TablePassword},
-  {path: 'create-credential-view', component: CreateCredentialView}
+  {path: 'create-credential', component: CreateCredential},
+  {path: 'edit-credential', component: EditCredential}
 ];
 
 @NgModule({

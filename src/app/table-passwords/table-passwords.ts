@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewC
 
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table'
+import { Router } from '@angular/router';
 import { Password } from '../create-credential/Password';
 import { FileSystemService } from '../filesystem.service';
 const electron =(<any>window).require('electron');
@@ -25,7 +26,7 @@ export class TablePassword {
 
 
 
-  constructor(private fsService: FileSystemService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private fsService: FileSystemService, private router: Router) {
     const passwords: Password[] = []
     this.dataSource=new MatTableDataSource(passwords);
     this.loadCredentials();
@@ -33,6 +34,7 @@ export class TablePassword {
   }
 
   ngOnInit() {
+    console.log("Initing table-passwords...")
     electron.ipcRenderer.on('storage:passwordSaved', () => {
       this.loadCredentials();
       //this.showMain();
@@ -83,11 +85,6 @@ export class TablePassword {
     }
   }
 
-  showMain() {
-    this.isMain = true;
-    this.currView = 'main'
-  }
-
   loadCredentials() {
     this.fsService.loadCrendentials().subscribe((data: Password[]) => {
       console.log("Got in table-passwords: " + data)
@@ -96,15 +93,14 @@ export class TablePassword {
   }
 
   showCreateForm() {
-    this.currView = 'create'
-    this.isMain = false
-
+    this.router.navigate(['/create-credential']);
   }
 
   editCred(row: Password){
-    console.log("Row id: " + row.id)
-    this.currView = 'edit'
-    this.isMain = false
+    console.log("Row Username: " + row.username)
+      this.router.navigate(['/edit-credential'], {state:
+        {data: {id: row.id, title: row.title, username: row.username, url: row.url, tag: row.tag}
+      }});
   }
 
 
