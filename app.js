@@ -11,7 +11,9 @@ const {app, BrowserWindow, ipcMain} = require('electron')
         height: 600,
         webPreferences: {
           contextIsolation: false, //https://stackoverflow.com/questions/61021885/electron-window-require-is-not-a-function-even-with-nodeintegration-set-to-true
-          nodeIntegration: true
+          nodeIntegration: true,
+          //preload: path.join(__dirname, './src/app/preload.js')
+
         }
       })
 
@@ -30,7 +32,10 @@ const {app, BrowserWindow, ipcMain} = require('electron')
       })
     }
 
-    app.on('ready', createWindow)
+    app.on('ready', () => {
+      //ipcMain.handle('storage:savePassword', handleSavePassword)
+      createWindow()
+    })
 
     app.on('window-all-closed', function () {
       if (process.platform !== 'darwin') app.quit()
@@ -40,18 +45,25 @@ const {app, BrowserWindow, ipcMain} = require('electron')
       if (mainWindow === null) createWindow()
     })
 
-    ipcMain.on( 'openFile', (title) => {
-      fs.readFile('test-json.json', 'utf8', function (err, data){
-        mainWindow.webContents.send("openFileResponse", data)
-      })
-    })
-
-    ipcMain.on( 'savePassword', (event, obj) => {
+    ipcMain.on( 'storage:savePassword', (event, obj) => {
       if(obj){
-        fs.writeFile('test-json.json', JSON.stringify(obj), function(err){
+        var passwords = fs.readFileSync('storage.json')
+        var jsArr = JSON.parse(passwords)
+        jsArr.push(obj)
+
+        fs.writeFileSync('storage.json', JSON.stringify(jsArr), function(err){
           if (err) {
             console.error(err);
+            return "failed"
           }
         })
+        console.log("Pass persisted")
+        event.reply('storage:passwordSaved')
       }
+    })
+
+    ipcMain.on( 'storage:fetchAll', (event) => {
+      var creds = fs.readFileSync('storage.json')
+      var jsArr = JSON.parse(creds);
+      event.returnValue = jsArr;
     })

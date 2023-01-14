@@ -1,41 +1,46 @@
-import {Component, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild, } from '@angular/core';
 
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table'
+import { Password } from '../create-credential/Password';
+import { FileSystemService } from '../filesystem.service';
+const electron =(<any>window).require('electron');
 
-/**
- * @title Data table with sorting and filtering.
- */
+
 @Component({
   selector: 'table-passwords',
   styleUrls: ['table-passwords.css'],
-  templateUrl: 'table-passwords.html',
+  templateUrl: 'table-passwords.html'
 })
 export class TablePassword {
   displayedColumns=['title', 'username', 'url', 'tag'];
-  dataSource: MatTableDataSource<PasswordData>;
+  dataSource: MatTableDataSource<Password>;
   selectedChips: string[] = [];
   tags= ['University', 'Games', 'Streaming', 'Entertainment'];
-
+  currView: string = 'main';
+  isMain: boolean = true
 
   @ViewChild(MatSort)
   sort: MatSort = new MatSort;
 
-  constructor() {
-    // Create 10 passwords
-    const passwords: PasswordData[]=[];
 
-    let passNetflix = {title: 'Netflix', username: 'mert', url: 'https://netflix.com', tag: 'Streaming'}
-    let passAmazon = {title: 'Amazon', username: 'jakob', url: 'https://amazon.com', tag: 'Streaming'}
-    let passCineplexx = {title: 'Cineplexx', username: 'jaypan', url: 'https://cineplexx.at', tag: 'Entertainment'}
 
-    passwords.push(passNetflix)
-    passwords.push(passAmazon)
-    passwords.push(passCineplexx)
-
-    // Assign the data to the data source for the table to render
+  constructor(private fsService: FileSystemService, private changeDetectorRef: ChangeDetectorRef) {
+    const passwords: Password[] = []
     this.dataSource=new MatTableDataSource(passwords);
+    this.loadCredentials();
 
+  }
+
+  ngOnInit() {
+    electron.ipcRenderer.on('storage:passwordSaved', () => {
+      this.loadCredentials();
+      //this.showMain();
+    })
+    electron.ipcRenderer.on('storage:passwordEdited', () => {
+      this.loadCredentials();
+      //this.showMain();
+    })
   }
 
   ngAfterViewInit() {
@@ -77,6 +82,32 @@ export class TablePassword {
       return incl;
     }
   }
+
+  showMain() {
+    this.isMain = true;
+    this.currView = 'main'
+  }
+
+  loadCredentials() {
+    this.fsService.loadCrendentials().subscribe((data: Password[]) => {
+      console.log("Got in table-passwords: " + data)
+      this.dataSource.data = data;
+    })
+  }
+
+  showCreateForm() {
+    this.currView = 'create'
+    this.isMain = false
+
+  }
+
+  editCred(row: Password){
+    console.log("Row id: " + row.id)
+    this.currView = 'edit'
+    this.isMain = false
+  }
+
+
 }
 
 export interface PasswordData {

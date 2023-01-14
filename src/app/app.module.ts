@@ -8,19 +8,20 @@ import { MatGridListModule } from '@angular/material/grid-list';
 
 import { TablePassword } from './table-passwords/table-passwords';
 import { FormsModule } from '@angular/forms';
+import { EditCredential } from './edit-credential/edit-credential';
 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import {MatSortModule} from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule }  from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon'
-import { DetailView } from './detail-view/detail-view';
-import { CreateCredentialView } from './create-credential-view/create-credential-view';
+import { CreateCredentialView } from './create-credential/create-credential';
 
 @NgModule({
   declarations: [
-    AppComponent, TablePassword, DetailView, CreateCredentialView
+    AppComponent, TablePassword, CreateCredentialView, EditCredential
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,8 @@ import { CreateCredentialView } from './create-credential-view/create-credential
     MatInputModule,
     MatChipsModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatFormFieldModule,
