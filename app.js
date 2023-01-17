@@ -1,4 +1,5 @@
 const {app, BrowserWindow, ipcMain} = require('electron')
+const { encrypt, decrypt } = require(".crypto/build/Release/addon.node");
 const url = require("url");
 const path = require("path");
 const fs = require("fs");
@@ -51,6 +52,7 @@ app.on('activate', function () {
 //TODO: refactor to use invoke()
 ipcMain.on( 'storage:savePassword', (event, obj) => {
   if(obj){
+    console.log(encrypt(obj.password, "Test"))
     var passwords = fs.readFileSync('storage.json')
     var jsArr = JSON.parse(passwords)
     jsArr.push(obj)
