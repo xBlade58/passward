@@ -6,14 +6,20 @@ void Encrypt(const Nan::FunctionCallbackInfo<v8::Value>& args) {
   if (!args[0]->IsString()) {
     Nan::ThrowError("First Argument must be a String");
     return;
-  } else if (!args[1]->IsString()) {
-    Nan::ThrowError("Second Argument must be a String");
-    return;
   }
-  std::string password = (*Nan::Utf8String(args[0]));
-  std::string key = (*Nan::Utf8String(args[1]));
 
-  auto message = Nan::New<v8::String>(password + key).ToLocalChecked();
+  std::string password = (*Nan::Utf8String(args[0]));
+
+  int s = 1;
+  std::string result = "";
+  for (int i = 0; i < password.length(); i++) {
+    if (isupper(password[i]))
+      result += char(int(password[i] + s - 65) % 26 + 65);
+    else
+      result += char(int(password[i] + s - 97) % 26 + 97);
+  }
+
+  auto message = Nan::New<v8::String>(result).ToLocalChecked();
   args.GetReturnValue().Set(message);
 }
 
@@ -23,19 +29,26 @@ void Decrypt(const Nan::FunctionCallbackInfo<v8::Value>& args) {
   if (!args[0]->IsString()) {
     Nan::ThrowError("First Argument must be a String");
     return;
-  } else if (!args[1]->IsString()) {
-    Nan::ThrowError("Second Argument must be a String");
-    return;
   }
-  std::string password = (*Nan::Utf8String(args[0]));
-  std::string key = (*Nan::Utf8String(args[1]));
 
-  auto message = Nan::New<v8::String>(password + key).ToLocalChecked();
+  std::string password = (*Nan::Utf8String(args[0]));
+
+  int s = 25;
+  std::string result = "";
+  for (int i = 0; i < password.length(); i++) {
+    if (isupper(password[i]))
+      result += char(int(password[i] + s - 65) % 26 + 65);
+    else
+      result += char(int(password[i] + s - 97) % 26 + 97);
+  }
+
+  auto message = Nan::New<v8::String>(result).ToLocalChecked();
   args.GetReturnValue().Set(message);
 }
 
 void Initialize(v8::Local<v8::Object> exports) {
-  v8::Local<v8::Context> context = exports->CreationContext();
+  v8::Isolate* isolate = exports->GetIsolate();
+  v8::Local<v8::Context>  context = isolate->GetCurrentContext();
   exports->Set(context, Nan::New("encrypt").ToLocalChecked(),
       Nan::New<v8::FunctionTemplate>(Encrypt)->GetFunction(context).ToLocalChecked());
   exports->Set(context, Nan::New("decrypt").ToLocalChecked(),
