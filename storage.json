@@ -1,18 +1,1 @@
-[
-  {
-    "id": "523b9ffc-b9c1-4f26-81e1-acb67c4b01bd",
-    "title": "spotify-newnew",
-    "username": "mert",
-    "password": "mert",
-    "url": "spotify.com",
-    "tag": "music"
-  },
-  {
-    "id": "33db61e3-f5f3-4462-96d2-119fb853c3b2",
-    "title": "netflix",
-    "username": "jakob",
-    "password": "hahaahh",
-    "url": "netflix.com",
-    "tag": "streaming"
-  }
-]
+[{"id":"523b9ffc-b9c1-4f26-81e1-acb67c4b01bd","title":"spotify-newnew","username":"mert","password":"mert","url":"spotify.com","tag":"music"},{"id":"33db61e3-f5f3-4462-96d2-119fb853c3b2","title":"netflix","username":"jakob","password":"hahaahh","url":"netflix.com","tag":"streaming"},{"id":"29f66c3a-8c2d-4c0b-a462-b2aec16d67bb","title":"Amazon Prime","username":"mert","password":"mert","url":"amaon.com","tag":"Streaming"},{"id":"ceebfda7-2b08-4eae-bdae-c8180f4126e3","title":"LoL","username":"mert","password":"jakob","url":"lol.com","tag":"Games"}]

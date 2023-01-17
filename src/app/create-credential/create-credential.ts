@@ -1,7 +1,7 @@
-import {Component, Output, EventEmitter, ChangeDetectorRef, ElementRef, ViewChild} from '@angular/core';
-import { NgForm,  } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Password } from './Password';
 
 //import { FileSystemService } from '../filesystem.service'

@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, ViewChild, } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table'
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Password } from '../create-credential/Password';
 import { FileSystemService } from '../filesystem.service';
@@ -17,9 +17,10 @@ export class TablePassword {
   displayedColumns=['title', 'username', 'url', 'tag'];
   dataSource: MatTableDataSource<Password>;
   selectedChips: string[] = [];
-  tags= ['University', 'Games', 'Streaming', 'Entertainment'];
+  tags= ['music', 'Games', 'Streaming', 'Entertainment'];
   currView: string = 'main';
   isMain: boolean = true
+  currSearchFilter: string = '';
 
   @ViewChild(MatSort)
   sort: MatSort = new MatSort;
@@ -34,7 +35,7 @@ export class TablePassword {
   }
 
   ngOnInit() {
-    console.log("Initing table-passwords...")
+    this.dataSource.filterPredicate = this.getFilterPredicate();
     electron.ipcRenderer.on('storage:passwordSaved', () => {
       this.loadCredentials();
       //this.showMain();
@@ -53,10 +54,9 @@ export class TablePassword {
 
     if(event.target != null){
       const nTarget = event.target as HTMLInputElement;
-      let filterValue = nTarget.value;
-      filterValue=filterValue.trim(); // Remove whitespace
-      filterValue=filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-      this.dataSource.filter=filterValue;
+      this.currSearchFilter= nTarget.value;
+      this.dataSource.filter = this.currSearchFilter.trim().toLowerCase();
+      //this.filterByTags();
     }
   }
 
@@ -69,19 +69,38 @@ export class TablePassword {
     }
 
     console.log('this.selecteChips:' + this.selectedChips)
-    this.filterByTags()
+    //this.filterByTags()
+    this.dataSource.filter = this.currSearchFilter.trim().toLowerCase();
+
   }
 
   filterByTags() {
     this.dataSource.filterPredicate = this.getFilterPredicate();
-    this.dataSource.filter='empty';
+    this.dataSource.filter=this.currSearchFilter;
   }
   getFilterPredicate(){
     console.log('Doing predicate..')
-    return (data: PasswordData, filter: string) => {
-      //TODO: consider filter:string as well
-      const incl = this.selectedChips.includes(data.tag);
-      return incl;
+    return (data: Password, filter: string) => {
+
+      const matchFilter = []
+      let isChipTag = false
+      if(this.selectedChips.length != 0){
+        //isChipTag = this.selectedChips.includes(data.tag);
+        //isChipTag = false
+      }
+
+
+      const colTitle = data.title;
+      const colUsername = data.username;
+      const colUrl = data.url;
+
+      const matchTitle = colTitle.toLowerCase().includes(filter)
+      const matchUsername = colUsername.toLowerCase().includes(filter)
+      const matchUrl = colUrl.toLowerCase().includes(filter)
+
+      matchFilter.push(matchTitle, matchUsername, matchUrl);
+
+      return isChipTag && matchFilter.some((el)=> el == true);
     }
   }
 
@@ -105,12 +124,3 @@ export class TablePassword {
 
 
 }
-
-export interface PasswordData {
-  title: string;
-  username: string;
-  url: string;
-  tag: string
-}
-
-

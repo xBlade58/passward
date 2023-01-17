@@ -1,10 +1,7 @@
 import { Component } from "@angular/core";
-import {  FormControl, FormGroup, NgForm  } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { FileSystemService } from "../filesystem.service";
-
-const electron =(<any>window).require('electron');
-
 
 @Component({
   selector: 'edit-credential',
