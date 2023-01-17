@@ -55,7 +55,7 @@ ipcMain.on( 'storage:savePassword', (event, obj) => {
     var jsArr = JSON.parse(passwords)
     jsArr.push(obj)
 
-    fs.writeFileSync('storage.json', JSON.stringify(jsArr), function(err){
+    fs.writeFileSync('storage.json', JSON.stringify(jsArr, null, 4), function(err){
       if (err) {
         console.error(err);
         return "failed"
@@ -95,7 +95,7 @@ ipcMain.handle('storage:editById', async (event, updatedData) => {
   console.log("Updated array")
   console.log(jsArr)
 
-  const n = await writeFile('storage.json', JSON.stringify(jsArr, null, 2), function (err){
+  const n = await writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
     if(err) throw err
   })
 })
