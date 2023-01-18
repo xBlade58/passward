@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
 import { Password } from './Password';
+import { FileSystemService } from '../filesystem.service';
 
 //import { FileSystemService } from '../filesystem.service'
 const electron =(<any>window).require('electron');
@@ -16,9 +17,6 @@ export class CreateCredential {
   hide=true;
   loading=false;
 
-  @Output() newPasswordEvent = new EventEmitter<Password>();
-  @Output() navToMainEvent = new EventEmitter();
-
   @ViewChild('falseDiv')
   falseDiv!: ElementRef<HTMLElement>;
 
@@ -28,12 +26,12 @@ export class CreateCredential {
     el.click();
   }
 
-  constructor(private router: Router){
-    this.registerListener()
+  constructor(private router: Router, private fsService: FileSystemService){
+
   }
 
   ngOnDestroy() {
-    console.log("I destroyed")
+    console.log("Credential-Component destroyed")
     this.loading= false;
   }
 
@@ -66,22 +64,16 @@ export class CreateCredential {
       url: url,
       tag: tag
     }
-    console.log('Saving...')
-    electron.ipcRenderer.send('storage:savePassword', obj);
+    this.fsService.saveCredential(obj).then(() => {
+      console.log("got message")
+      this.loading = false;
+      this.router.navigate(['']);
+    })
     this.loading = true;
   }
 
   cancel(){
     this.router.navigate(['']);
   }
-
-  registerListener(){
-
-    electron.ipcRenderer.on('storage:passwordSaved', () => {
-      this.loading = false;
-      this.router.navigate([''])
-    })
-  }
-
 }
 

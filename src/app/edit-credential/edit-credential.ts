@@ -20,7 +20,7 @@ export class EditCredential {
     tag: new FormControl()
   })
 
-  constructor(private router: Router, private fsService: FileSystemService,){
+  constructor(private router: Router, private fsService: FileSystemService){
 
   }
 
@@ -51,15 +51,25 @@ export class EditCredential {
     this.router.navigate([''])
   }
 
-  edit(){
+  async edit(){
+    console.log("Editing..")
+    console.log(this.editForm)
     this.loading = true;
-    this.fsService.editCredentialById(this.editForm.value).then(()=> {
+    var obj = {
+      id: this.editForm.get('id')?.value,
+      title: this.editForm.get('title')?.value,
+      username: this.editForm.get('usernmae')?.value,
+      password: this.editForm.get('password')?.value,
+      url: this.editForm.get('url')?.value,
+      tag: this.editForm.get('tag')?.value
+    }
+    this.fsService.editCredential(obj).then(()=> {
       console.log("Navigating back to main")
       this.loading = false;
       this.router.navigate([''])
-
     })
 
   }
-
 }
+
+

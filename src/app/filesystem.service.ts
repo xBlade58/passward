@@ -41,7 +41,11 @@ export class FileSystemService {
     return of(res);
   }
 
-  async editCredentialById(toUpdate: any): Promise<void> {
-    return electron.ipcRenderer.invoke('storage:editById', toUpdate)
+  async editCredential(toUpdate: any): Promise<void> {
+    return electron.ipcRenderer.invoke('storage:editCredential', toUpdate)
+  }
+
+  async saveCredential(newCred: any): Promise<void> {
+    return electron.ipcRenderer.invoke('storage:saveCredential', newCred)
   }
 }
