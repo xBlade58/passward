@@ -9,7 +9,7 @@ node-gyp build
 
 // In Electron do this
 
-npm install crypto
+npm install passwardcrypto
 npm install --save-dev electron-rebuild
 
 # Every time you run "npm install", run this:
@@ -17,3 +17,5 @@ npm install --save-dev electron-rebuild
 
 # If you have trouble on Windows, try:
 .\node_modules\.bin\electron-rebuild.cmd
+
+//Caesar cipher slightly modifed version of https://www.geeksforgeeks.org/caesar-cipher-in-cryptography/

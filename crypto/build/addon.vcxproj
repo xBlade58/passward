@@ -16,7 +16,7 @@
     <RootNamespace>addon</RootNamespace>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
   <PropertyGroup Label="Configuration">
@@ -36,7 +36,6 @@
     <ExecutablePath>$(ExecutablePath);$(MSBuildProjectDirectory)\..\bin\;$(MSBuildProjectDirectory)\..\bin\</ExecutablePath>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <IntDir>$(Configuration)\obj\$(ProjectName)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.node</TargetExt>
@@ -48,7 +47,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\include\node;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\src;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\openssl\config;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\openssl\openssl\include;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\uv\include;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\zlib;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\v8\include;..\node_modules\nan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\j\.electron-gyp\22.0.0\include\node;C:\Users\j\.electron-gyp\22.0.0\src;C:\Users\j\.electron-gyp\22.0.0\deps\openssl\config;C:\Users\j\.electron-gyp\22.0.0\deps\openssl\openssl\include;C:\Users\j\.electron-gyp\22.0.0\deps\uv\include;C:\Users\j\.electron-gyp\22.0.0\deps\zlib;C:\Users\j\.electron-gyp\22.0.0\deps\v8\include;..\node_modules\nan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus -std:c++17 %(AdditionalOptions)</AdditionalOptions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
@@ -59,37 +59,32 @@
       <OmitFramePointers>false</OmitFramePointers>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=addon;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=addon;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;ELECTRON_ENSURE_CONFIG_GYPI;USING_ELECTRON_CONFIG_GYPI;V8_COMPRESS_POINTERS;V8_COMPRESS_POINTERS_IN_SHARED_CAGE;V8_ENABLE_SANDBOX;V8_31BIT_SMIS_ON_64BIT_ARCH;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENSSL_NO_ASM;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <StringPooling>true</StringPooling>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
-    <Lib>
-      <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
-    </Lib>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\jakob\\AppData\\Local\\node-gyp\\Cache\\14.17.0\\x64\\node.lib&quot;</AdditionalDependencies>
-      <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\j\\.electron-gyp\\22.0.0\\x64\\node.lib&quot;</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4199 %(AdditionalOptions)</AdditionalOptions>
       <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
       <OutputFile>$(OutDir)$(ProjectName).node</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetExt>.node</TargetExt>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\include\node;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\src;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\openssl\config;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\openssl\openssl\include;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\uv\include;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\zlib;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\v8\include;..\node_modules\nan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=addon;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\j\.electron-gyp\22.0.0\include\node;C:\Users\j\.electron-gyp\22.0.0\src;C:\Users\j\.electron-gyp\22.0.0\deps\openssl\config;C:\Users\j\.electron-gyp\22.0.0\deps\openssl\openssl\include;C:\Users\j\.electron-gyp\22.0.0\deps\uv\include;C:\Users\j\.electron-gyp\22.0.0\deps\zlib;C:\Users\j\.electron-gyp\22.0.0\deps\v8\include;..\node_modules\nan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=addon;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;ELECTRON_ENSURE_CONFIG_GYPI;USING_ELECTRON_CONFIG_GYPI;V8_COMPRESS_POINTERS;V8_COMPRESS_POINTERS_IN_SHARED_CAGE;V8_ENABLE_SANDBOX;V8_31BIT_SMIS_ON_64BIT_ARCH;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENSSL_NO_ASM;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;V8_ENABLE_CHECKS;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\include\node;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\src;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\openssl\config;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\openssl\openssl\include;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\uv\include;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\zlib;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\v8\include;..\node_modules\nan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\j\.electron-gyp\22.0.0\include\node;C:\Users\j\.electron-gyp\22.0.0\src;C:\Users\j\.electron-gyp\22.0.0\deps\openssl\config;C:\Users\j\.electron-gyp\22.0.0\deps\openssl\openssl\include;C:\Users\j\.electron-gyp\22.0.0\deps\uv\include;C:\Users\j\.electron-gyp\22.0.0\deps\zlib;C:\Users\j\.electron-gyp\22.0.0\deps\v8\include;..\node_modules\nan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus -std:c++17 %(AdditionalOptions)</AdditionalOptions>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <DisableSpecificWarnings>4351;4355;4800;4251;4275;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
@@ -102,33 +97,27 @@
       <OmitFramePointers>true</OmitFramePointers>
       <Optimization>Full</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=addon;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=addon;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;ELECTRON_ENSURE_CONFIG_GYPI;USING_ELECTRON_CONFIG_GYPI;V8_COMPRESS_POINTERS;V8_COMPRESS_POINTERS_IN_SHARED_CAGE;V8_ENABLE_SANDBOX;V8_31BIT_SMIS_ON_64BIT_ARCH;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENSSL_NO_ASM;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <StringPooling>true</StringPooling>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWarningAsError>false</TreatWarningAsError>
       <WarningLevel>Level3</WarningLevel>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
-    <Lib>
-      <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
-    </Lib>
     <Link>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\jakob\\AppData\\Local\\node-gyp\\Cache\\14.17.0\\x64\\node.lib&quot;</AdditionalDependencies>
-      <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\j\\.electron-gyp\\22.0.0\\x64\\node.lib&quot;</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4199 %(AdditionalOptions)</AdditionalOptions>
       <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OptimizeReferences>true</OptimizeReferences>
       <OutputFile>$(OutDir)$(ProjectName).node</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TargetExt>.node</TargetExt>
       <TargetMachine>MachineX64</TargetMachine>
     </Link>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\include\node;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\src;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\openssl\config;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\openssl\openssl\include;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\uv\include;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\zlib;C:\Users\jakob\AppData\Local\node-gyp\Cache\14.17.0\deps\v8\include;..\node_modules\nan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=addon;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\j\.electron-gyp\22.0.0\include\node;C:\Users\j\.electron-gyp\22.0.0\src;C:\Users\j\.electron-gyp\22.0.0\deps\openssl\config;C:\Users\j\.electron-gyp\22.0.0\deps\openssl\openssl\include;C:\Users\j\.electron-gyp\22.0.0\deps\uv\include;C:\Users\j\.electron-gyp\22.0.0\deps\zlib;C:\Users\j\.electron-gyp\22.0.0\deps\v8\include;..\node_modules\nan;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=addon;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;V8_DEPRECATION_WARNINGS;V8_IMMINENT_DEPRECATION_WARNINGS;_GLIBCXX_USE_CXX11_ABI=1;ELECTRON_ENSURE_CONFIG_GYPI;USING_ELECTRON_CONFIG_GYPI;V8_COMPRESS_POINTERS;V8_COMPRESS_POINTERS_IN_SHARED_CAGE;V8_ENABLE_SANDBOX;V8_31BIT_SMIS_ON_64BIT_ARCH;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;OPENSSL_NO_ASM;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -138,7 +127,7 @@
     <ClCompile Include="..\addon.cc">
       <ObjectFileName>$(IntDir)\addon.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="C:\Users\jakob\AppData\Roaming\npm\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
+    <ClCompile Include="D:\FHMaster\passward\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
   <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets"/>

@@ -1,5 +1,5 @@
 const {app, BrowserWindow, ipcMain} = require('electron')
-const { encrypt, decrypt } = require(".crypto/build/Release/addon.node");
+const { encrypt, decrypt } = require('passwardcrypto');
 const url = require("url");
 const path = require("path");
 const fs = require("fs");
@@ -52,7 +52,7 @@ app.on('activate', function () {
 //TODO: refactor to use invoke()
 ipcMain.on( 'storage:savePassword', (event, obj) => {
   if(obj){
-    console.log(encrypt(obj.password, "Test"))
+    obj.password = encrypt(obj.password)
     var passwords = fs.readFileSync('storage.json')
     var jsArr = JSON.parse(passwords)
     jsArr.push(obj)
@@ -78,7 +78,7 @@ ipcMain.handle('storage:fetchById', async (event, id) => {
   var jsArr = JSON.parse(creds);
   const result = jsArr.filter(obj => obj.id == id)
   if(result.length == 1) {
-    return result[0].password;
+    return decrypt(result[0].password);
   }else {
     console.log("Not such Credential")
   }
@@ -90,6 +90,7 @@ ipcMain.handle('storage:editById', async (event, updatedData) => {
 
   for(var i = 0; i < jsArr.length; i){
     if(jsArr[i].id === updatedData.id){
+      updatedData.password = encrypt(updatedData.password)
       jsArr[i] = updatedData
       break
     }
