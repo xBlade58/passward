@@ -1,5 +1,5 @@
 const {app, BrowserWindow, ipcMain} = require('electron')
-const { encrypt, decrypt } = require('./passwardcrypto');
+//const { encrypt, decrypt } = require('./passwardcrypto');
 const url = require("url");
 const path = require("path");
 const fs = require("fs");
@@ -14,20 +14,20 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      contextIsolation: false, //https://stackoverflow.com/questions/61021885/electron-window-require-is-not-a-function-even-with-nodeintegration-set-to-true
+      //contextIsolation: false, //https://stackoverflow.com/questions/61021885/electron-window-require-is-not-a-function-even-with-nodeintegration-set-to-true
       nodeIntegration: true,
-      //preload: path.join(__dirname, './src/app/preload.js')
-
+      preload: path.join(__dirname, './preload.js'),
     }
   })
 
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(__dirname, `/dist/pass-ward/index.html`),
+      pathname: path.join(__dirname, `../dist/pass-ward/index.html`),
       protocol: "file:",
       slashes: true
     })
   );
+
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 
@@ -49,26 +49,9 @@ app.on('activate', function () {
   if (mainWindow === null) createWindow()
 })
 
-//TODO: refactor to use invoke()
-/*
-ipcMain.on( 'storage:savePassword', (event, obj) => {
-  if(obj){
-    obj.password = encrypt(obj.password)
-    var passwords = fs.readFileSync('storage.json')
-    var jsArr = JSON.parse(passwords)
-    jsArr.push(obj)
-
-    fs.writeFileSync('storage.json', JSON.stringify(jsArr, null, 4), function(err){
-      if (err) {
-        console.error(err);
-        return "failed"
-      }
-    })
-    event.reply('storage:passwordSaved')
-  }
-})*/
-
 ipcMain.handle('storage:saveCredential', async (event, obj) => {
+  console.log("Good approach!")
+  /*
   if(obj){
     obj.password = encrypt(obj.password)
     var credentials = await readFile('storage.json')
@@ -78,8 +61,8 @@ ipcMain.handle('storage:saveCredential', async (event, obj) => {
     const p =  writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err) {
       if(err) console.err(err)
     })
-    
-  }
+
+  }*/
 })
 
 ipcMain.on( 'storage:fetchAll', (event) => {

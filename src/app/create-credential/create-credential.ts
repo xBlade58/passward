@@ -65,7 +65,6 @@ export class CreateCredential {
       tag: tag
     }
     this.fsService.saveCredential(obj).then(() => {
-      console.log("got message")
       this.loading = false;
       this.router.navigate(['']);
     })

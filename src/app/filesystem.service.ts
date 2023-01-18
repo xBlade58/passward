@@ -46,6 +46,7 @@ export class FileSystemService {
   }
 
   async saveCredential(newCred: any): Promise<void> {
-    return electron.ipcRenderer.invoke('storage:saveCredential', newCred)
+    return await window.electronAPI.saveCredential()
+    //return electron.ipcRenderer.invoke('storage:saveCredential', newCred)
   }
 }
