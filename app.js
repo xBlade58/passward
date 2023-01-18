@@ -1,5 +1,5 @@
 const {app, BrowserWindow, ipcMain} = require('electron')
-const { encrypt, decrypt } = require('passwardcrypto');
+const { encrypt, decrypt } = require('./passwardcrypto');
 const url = require("url");
 const path = require("path");
 const fs = require("fs");
@@ -50,6 +50,7 @@ app.on('activate', function () {
 })
 
 //TODO: refactor to use invoke()
+/*
 ipcMain.on( 'storage:savePassword', (event, obj) => {
   if(obj){
     obj.password = encrypt(obj.password)
@@ -65,6 +66,20 @@ ipcMain.on( 'storage:savePassword', (event, obj) => {
     })
     event.reply('storage:passwordSaved')
   }
+})*/
+
+ipcMain.handle('storage:saveCredential', async (event, obj) => {
+  if(obj){
+    obj.password = encrypt(obj.password)
+    var credentials = await readFile('storage.json')
+    var jsArr = JSON.parse(credentials)
+    jsArr.push(obj)
+
+    const p =  writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err) {
+      if(err) console.err(err)
+    })
+    
+  }
 })
 
 ipcMain.on( 'storage:fetchAll', (event) => {
@@ -78,27 +93,29 @@ ipcMain.handle('storage:fetchById', async (event, id) => {
   var jsArr = JSON.parse(creds);
   const result = jsArr.filter(obj => obj.id == id)
   if(result.length == 1) {
-    return decrypt(result[0].password);
+    return result[0].password;
   }else {
     console.log("Not such Credential")
   }
 })
 
-ipcMain.handle('storage:editById', async (event, updatedData) => {
+ipcMain.handle('storage:editCredential', async (event, updatedData) => {
   var creds = await readFile('storage.json')
   var jsArr = JSON.parse(creds);
-
-  for(var i = 0; i < jsArr.length; i){
+  console.log("i will update with id: " + updatedData.id)
+  for(var i = 0; i < jsArr.length; i++){
+    console.log(jsArr[i].id)
     if(jsArr[i].id === updatedData.id){
-      updatedData.password = encrypt(updatedData.password)
+      //updatedData.password = encrypt(updatedData.password)
       jsArr[i] = updatedData
+      console.log("found to edit: " + updatedData.id)
       break
     }
   }
   console.log("Updated array")
   console.log(jsArr)
 
-  const n = await writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
+  const p = writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
     if(err) throw err
   })
 })
