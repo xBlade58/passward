@@ -60,6 +60,8 @@ export class EditCredential {
       url: this.editForm.get('url')?.value,
       tag: this.editForm.get('tag')?.value
     }
+    console.log(JSON.stringify(obj))
+  
     this.fsService.editCredential(obj).then(()=> {
       this.loading = false;
       this.router.navigate([''])

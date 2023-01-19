@@ -11,6 +11,9 @@ storage.json
 /out-tsc
 /bazel-out
 
+/**/build
+/**/bin
+
 # Node
 /node_modules
 npm-debug.log
@@ -45,3 +48,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+
