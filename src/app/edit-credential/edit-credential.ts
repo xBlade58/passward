@@ -30,13 +30,12 @@ export class EditCredential {
       id: data.id,
       title: data.title,
       username: data.username,
-      password: "ffffffffffffffffffffffffffffffffffffffff",
+      password: "",
       url: data.url,
       tag: data.tag
     })
-
+  
     this.fsService.loadPasswordById(data.id).then((pd: string) => {
-      console.log("Password loaded")
       this.editForm.patchValue({ password: pd });
     })
 
@@ -64,7 +63,6 @@ export class EditCredential {
     console.log(JSON.stringify(obj))
   
     this.fsService.editCredential(obj).then(()=> {
-      console.log("Navigating back to main")
       this.loading = false;
       this.router.navigate([''])
     })
