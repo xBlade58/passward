@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs/internal/observable/of';
 import { Password } from './create-credential/Password';
-//const electron = (<any>window).require('electron');
-//import {electron} from 'electron'
+
 
 @Injectable({
   providedIn: 'root'

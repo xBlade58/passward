@@ -30,7 +30,7 @@ export class EditCredential {
       id: data.id,
       title: data.title,
       username: data.username,
-      password: "ffffffffffffffffffffffffffffffffffffffff",
+      password: "",
       url: data.url,
       tag: data.tag
     })

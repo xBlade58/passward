@@ -58,7 +58,7 @@ async function handleSaveCredential(event, obj) {
     var jsArr = JSON.parse(credentials)
     jsArr.push(obj)
 
-    const p =  writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err) {
+    writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err) {
       if(err) console.err(err)
     })
 
@@ -89,11 +89,10 @@ async function handleEditCredential(event, updatedData) {
     if(jsArr[i].id === updatedData.id){
       updatedData.password = encrypt(updatedData.password)
       jsArr[i] = updatedData
-      console.log("found to edit: " + updatedData.id)
       break
     }
   }
-  const p = writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
+  writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
     if(err) throw err
   })
 }
