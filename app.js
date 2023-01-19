@@ -93,7 +93,7 @@ ipcMain.handle('storage:fetchById', async (event, id) => {
   var jsArr = JSON.parse(creds);
   const result = jsArr.filter(obj => obj.id == id)
   if(result.length == 1) {
-    return result[0].password;
+    return decrypt(result[0].password);
   }else {
     console.log("Not such Credential")
   }
@@ -102,11 +102,10 @@ ipcMain.handle('storage:fetchById', async (event, id) => {
 ipcMain.handle('storage:editCredential', async (event, updatedData) => {
   var creds = await readFile('storage.json')
   var jsArr = JSON.parse(creds);
-  console.log("i will update with id: " + updatedData.id)
   for(var i = 0; i < jsArr.length; i++){
     console.log(jsArr[i].id)
     if(jsArr[i].id === updatedData.id){
-      //updatedData.password = encrypt(updatedData.password)
+      updatedData.password = encrypt(updatedData.password)
       jsArr[i] = updatedData
       console.log("found to edit: " + updatedData.id)
       break
