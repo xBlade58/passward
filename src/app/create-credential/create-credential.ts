@@ -5,9 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { Password } from './Password';
 import { FileSystemService } from '../filesystem.service';
 
-//import { FileSystemService } from '../filesystem.service'
-const electron =(<any>window).require('electron');
-
 @Component({
   selector: 'create-credential',
   styleUrls: ['create-credential.css'],

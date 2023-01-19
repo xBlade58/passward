@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { Password } from './create-credential/Password';
-const electron = (<any>window).require('electron');
+//const electron = (<any>window).require('electron');
+//import {electron} from 'electron'
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +15,17 @@ export class FileSystemService {
 
   }
 
-
+  
   async loadPasswordById(id: string): Promise<string> {
-    return electron.ipcRenderer.invoke('storage:fetchById', id)
-      .then((response:any) => {
-        return response;
+    return await window.electronAPI.loadPasswordById(id)
+      .then((password:any) => {
+        return password;
       });
   }
-
-  loadCrendentials(): Observable<Password[]>{
-    const creds = electron.ipcRenderer.sendSync('storage:fetchAll')
+  
+  async loadCrendentials(): Promise<Password[]>{
+    const creds = await window.electronAPI.loadCredentials()
     let res: Password[] = [];
-
     creds.forEach((cred:any) => {
       const pCred: Password = {
         id: cred.id,
@@ -38,15 +38,14 @@ export class FileSystemService {
       res.push(pCred);
     })
 
-    return of(res);
+    return res;
   }
 
   async editCredential(toUpdate: any): Promise<void> {
-    return electron.ipcRenderer.invoke('storage:editCredential', toUpdate)
+    return await window.electronAPI.editCredential(toUpdate)
   }
 
   async saveCredential(newCred: any): Promise<void> {
-    return await window.electronAPI.saveCredential()
-    //return electron.ipcRenderer.invoke('storage:saveCredential', newCred)
+    return await window.electronAPI.saveCredential(newCred)
   }
 }

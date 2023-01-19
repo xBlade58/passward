@@ -34,9 +34,8 @@ export class EditCredential {
       url: data.url,
       tag: data.tag
     })
-
+  
     this.fsService.loadPasswordById(data.id).then((pd: string) => {
-      console.log("Password loaded")
       this.editForm.patchValue({ password: pd });
     })
 
@@ -52,19 +51,16 @@ export class EditCredential {
   }
 
   async edit(){
-    console.log("Editing..")
-    console.log(this.editForm)
     this.loading = true;
     var obj = {
       id: this.editForm.get('id')?.value,
       title: this.editForm.get('title')?.value,
-      username: this.editForm.get('usernmae')?.value,
+      username: this.editForm.get('username')?.value,
       password: this.editForm.get('password')?.value,
       url: this.editForm.get('url')?.value,
       tag: this.editForm.get('tag')?.value
     }
     this.fsService.editCredential(obj).then(()=> {
-      console.log("Navigating back to main")
       this.loading = false;
       this.router.navigate([''])
     })

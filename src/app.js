@@ -1,5 +1,5 @@
 const {app, BrowserWindow, ipcMain} = require('electron')
-//const { encrypt, decrypt } = require('./passwardcrypto');
+const { encrypt, decrypt } = require('../passwardcrypto');
 const url = require("url");
 const path = require("path");
 const fs = require("fs");
@@ -14,7 +14,6 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      //contextIsolation: false, //https://stackoverflow.com/questions/61021885/electron-window-require-is-not-a-function-even-with-nodeintegration-set-to-true
       nodeIntegration: true,
       preload: path.join(__dirname, './preload.js'),
     }
@@ -37,7 +36,10 @@ function createWindow () {
 }
 
 app.on('ready', () => {
-  //ipcMain.handle('storage:savePassword', handleSavePassword)
+  ipcMain.handle('storage:fetchAll', handleFetchAll);
+  ipcMain.handle('storage:fetchPasswordById', handlePasswordById);
+  ipcMain.handle('storage:saveCredential', handleSaveCredential);
+  ipcMain.handle('storage:editCredential', handleEditCredential);
   createWindow()
 })
 
@@ -49,9 +51,7 @@ app.on('activate', function () {
   if (mainWindow === null) createWindow()
 })
 
-ipcMain.handle('storage:saveCredential', async (event, obj) => {
-  console.log("Good approach!")
-  /*
+async function handleSaveCredential(event, obj) {
   if(obj){
     obj.password = encrypt(obj.password)
     var credentials = await readFile('storage.json')
@@ -62,45 +62,40 @@ ipcMain.handle('storage:saveCredential', async (event, obj) => {
       if(err) console.err(err)
     })
 
-  }*/
-})
+  }
+}
 
-ipcMain.on( 'storage:fetchAll', (event) => {
-  var creds = fs.readFileSync('storage.json')
-  var jsArr = JSON.parse(creds);
-  event.returnValue = jsArr;
-})
+async function handleFetchAll(){
+  const creds =  await readFile('storage.json')
+  const jsArr = JSON.parse(creds)
+  return jsArr;
+}
 
-ipcMain.handle('storage:fetchById', async (event, id) => {
+async function handlePasswordById(event, id) {
   var creds = await readFile('storage.json')
   var jsArr = JSON.parse(creds);
   const result = jsArr.filter(obj => obj.id == id)
   if(result.length == 1) {
-    return result[0].password;
+    return decrypt(result[0].password)
   }else {
     console.log("Not such Credential")
   }
-})
+}
 
-ipcMain.handle('storage:editCredential', async (event, updatedData) => {
+async function handleEditCredential(event, updatedData) {
   var creds = await readFile('storage.json')
   var jsArr = JSON.parse(creds);
-  console.log("i will update with id: " + updatedData.id)
   for(var i = 0; i < jsArr.length; i++){
-    console.log(jsArr[i].id)
     if(jsArr[i].id === updatedData.id){
-      //updatedData.password = encrypt(updatedData.password)
+      updatedData.password = encrypt(updatedData.password)
       jsArr[i] = updatedData
       console.log("found to edit: " + updatedData.id)
       break
     }
   }
-  console.log("Updated array")
-  console.log(jsArr)
-
   const p = writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
     if(err) throw err
   })
-})
+}
 
 

@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Password } from '../create-credential/Password';
 import { FileSystemService } from '../filesystem.service';
-const electron =(<any>window).require('electron');
 
 
 @Component({
@@ -34,17 +33,6 @@ export class TablePassword {
 
   }
 
-  ngOnInit() {
-    this.dataSource.filterPredicate = this.getFilterPredicate();
-    electron.ipcRenderer.on('storage:passwordSaved', () => {
-      this.loadCredentials();
-      //this.showMain();
-    })
-    electron.ipcRenderer.on('storage:passwordEdited', () => {
-      this.loadCredentials();
-      //this.showMain();
-    })
-  }
 
   ngAfterViewInit() {
     this.dataSource.sort=this.sort;
@@ -105,8 +93,8 @@ export class TablePassword {
   }
 
   loadCredentials() {
-    this.fsService.loadCrendentials().subscribe((data: Password[]) => {
-      console.log("Got in table-passwords: " + data)
+    this.fsService.loadCrendentials().then((data: Password[]) => {
+      console.log("length:" + data.length)
       this.dataSource.data = data;
     })
   }
@@ -116,7 +104,6 @@ export class TablePassword {
   }
 
   editCred(row: Password){
-    console.log("Row Username: " + row.username)
       this.router.navigate(['/edit-credential'], {state:
         {data: {id: row.id, title: row.title, username: row.username, url: row.url, tag: row.tag}
       }});
