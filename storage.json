@@ -1,34 +1,10 @@
 [
     {
-        "id": "b217ea30-bb57-4645-a359-b6a258e03007",
-        "title": "jakob",
-        "username": "jakob",
-        "password": "kblpc",
-        "url": "jakob",
-        "tag": "jakob"
-    },
-    {
-        "id": "3708e00c-617d-41d3-b433-adee5a93020f",
-        "title": "h",
-        "username": "h",
-        "password": "i",
-        "url": "h",
-        "tag": "h"
-    },
-    {
-        "id": "3c64206e-dbe9-4215-8169-caa6b94c59f4",
-        "title": "everything",
-        "username": "everything",
-        "password": "fwfszuijoh",
-        "url": "everything",
-        "tag": "everything"
-    },
-    {
-        "id": "1772c536-2ea5-4d16-a282-03e4303ff8c2",
-        "title": "",
-        "username": "",
-        "password": "",
-        "url": "",
-        "tag": ""
+        "id": "94e18905-e3e5-4528-9370-f7228ca234e5",
+        "title": "Netflix",
+        "username": "movieManica2",
+        "password": "ofugmjytvyyt",
+        "url": "netflix.com",
+        "tag": "Film"
     }
 ]

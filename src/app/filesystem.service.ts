@@ -45,4 +45,8 @@ export class FileSystemService {
   async saveCredential(newCred: any): Promise<void> {
     return await window.electronAPI.saveCredential(newCred)
   }
+
+  async deleteCredentialById(id: string): Promise<void> {
+    return await window.electronAPI.deleteCredentialById(id)
+  }
 }

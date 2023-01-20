@@ -50,6 +50,15 @@ export class EditCredential {
     this.router.navigate([''])
   }
 
+  async delete(){
+    this.loading = true;
+    var toDelteId = history.state.data.id;
+    this.fsService.deleteCredentialById(toDelteId).then(()=> {
+      this.loading = false;
+      this.router.navigate(['']);
+    })
+  }
+
   async edit(){
     this.loading = true;
     var obj = {
