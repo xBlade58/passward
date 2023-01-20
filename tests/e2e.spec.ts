@@ -5,7 +5,7 @@ let electronApp : ElectronApplication
 let page : Page
 
 test.beforeAll(async () => {
-  electronApp = await electron.launch({ args: ['./app.js'] });
+  electronApp = await electron.launch({ args: ['./src/app.js'] });
   // Evaluation expression in the Electron context.
   const appPath = await electronApp.evaluate(async ({ app }) => {
   // This runs in the main Electron process, parameter here is always
