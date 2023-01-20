@@ -28,9 +28,11 @@ export class TablePassword {
   constructor(private fsService: FileSystemService, private router: Router) {
     const passwords: Password[] = []
     this.dataSource=new MatTableDataSource(passwords);
+    this.dataSource.filterPredicate = this.getFilterPredicate();
     this.loadCredentials();
 
   }
+
 
 
   ngAfterViewInit() {
@@ -42,8 +44,7 @@ export class TablePassword {
     if(event.target != null){
       const nTarget = event.target as HTMLInputElement;
       this.currSearchFilter= nTarget.value;
-      this.dataSource.filter = this.currSearchFilter.trim().toLowerCase();
-      //this.filterByTags();
+      this.filterByStringAndTag();
     }
   }
 
@@ -54,46 +55,48 @@ export class TablePassword {
     } else {
       this.selectedChips.push(chip);
     }
-
-    console.log('this.selecteChips:' + this.selectedChips)
-    //this.filterByTags()
-    this.dataSource.filter = this.currSearchFilter.trim().toLowerCase();
-
+    this.filterByStringAndTag()
   }
 
-  filterByTags() {
-    this.dataSource.filterPredicate = this.getFilterPredicate();
-    this.dataSource.filter=this.currSearchFilter;
+  filterByStringAndTag() {
+    if(this.currSearchFilter === '') {
+        this.dataSource.filter = 'empty'
+    } else {
+      this.dataSource.filter = this.currSearchFilter
+    }
   }
   getFilterPredicate(){
-    console.log('Doing predicate..')
     return (data: Password, filter: string) => {
-
-      const matchFilter = []
-      let isChipTag = false
-      if(this.selectedChips.length != 0){
-        //isChipTag = this.selectedChips.includes(data.tag);
-        //isChipTag = false
+      
+      //if no term inserted
+      if(filter === 'empty'){
+        if(this.selectedChips.length === 0) return true;
+        return checkForTags(this.selectedChips, data.tag)
       }
 
+      const matchFilter = []
 
       const colTitle = data.title;
       const colUsername = data.username;
       const colUrl = data.url;
 
-      const matchTitle = colTitle.toLowerCase().includes(filter)
-      const matchUsername = colUsername.toLowerCase().includes(filter)
-      const matchUrl = colUrl.toLowerCase().includes(filter)
+      const matchTitle = colTitle.toLowerCase().startsWith(filter.toLowerCase())
+      const matchUsername = colUsername.toLowerCase().startsWith(filter.toLowerCase())
+      const matchUrl = colUrl.toLowerCase().startsWith(filter.toLowerCase())
 
       matchFilter.push(matchTitle, matchUsername, matchUrl);
+      const matchStrings = matchFilter.some((el)=> el == true);
 
-      return isChipTag && matchFilter.some((el)=> el == true);
+      //if key term but no tags
+      if(this.selectedChips.length === 0) {
+        return matchStrings
+      }
+      return checkForTags(this.selectedChips, data.tag) && matchStrings;
     }
   }
 
   loadCredentials() {
     this.fsService.loadCrendentials().then((data: Password[]) => {
-      console.log("length:" + data.length)
       this.dataSource.data = data;
     })
   }
@@ -110,3 +113,7 @@ export class TablePassword {
 
 
 }
+function checkForTags(selectedChips: string[], tag: string) {
+  return selectedChips.includes(tag)
+}
+

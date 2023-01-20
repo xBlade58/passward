@@ -1,34 +1,26 @@
 [
     {
-        "id": "b217ea30-bb57-4645-a359-b6a258e03007",
-        "title": "jakob",
-        "username": "jakob",
-        "password": "kblpc",
-        "url": "jakob",
-        "tag": "jakob"
+        "id": "179a5e38-6c36-4bb4-ab72-f390c81b1bee",
+        "title": "Netflix",
+        "username": "mert",
+        "password": "nfsu",
+        "url": "netflix.com",
+        "tag": "Streaming"
     },
     {
-        "id": "3708e00c-617d-41d3-b433-adee5a93020f",
-        "title": "h",
-        "username": "h",
-        "password": "i",
-        "url": "h",
-        "tag": "h"
+        "id": "7199e1ce-bea4-48d7-ae54-fae77d385aca",
+        "title": "LoL",
+        "username": "mert",
+        "password": "nfsu",
+        "url": "lol.com",
+        "tag": "Games"
     },
     {
-        "id": "3c64206e-dbe9-4215-8169-caa6b94c59f4",
-        "title": "everything",
-        "username": "everything",
-        "password": "fwfszuijoh",
-        "url": "everything",
-        "tag": "everything"
-    },
-    {
-        "id": "1772c536-2ea5-4d16-a282-03e4303ff8c2",
-        "title": "",
-        "username": "",
-        "password": "",
-        "url": "",
-        "tag": ""
+        "id": "4e355c7e-d739-4a27-abd5-2b58251b0bc3",
+        "title": "Amazon",
+        "username": "mert",
+        "password": "nfsu",
+        "url": "amazon.com",
+        "tag": "Streaming"
     }
 ]
