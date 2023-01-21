@@ -78,24 +78,10 @@ export class CreateCredential {
     if(index >= 0) { this.currTags.splice(index, 1)}
 
   }
-  /* may be inlcuded later
-  editTag(tag: string, event: MatChipEditedEvent) {
-    const value = event.value.trim();
-
-    //Remove tag if it no longer has a name
-    if(!value) {
-      this.removeTag(tag);
-    }
-
-    //Edit existing tag
-    const index = this.currTags.indexOf(tag);
-    if(index >= 0) { 
-      this.currTags[index] = value
-    }
-  }*/
+  
   selected(event: MatAutocompleteSelectedEvent) {
     this.currTags.push(event.option.viewValue);
-    if(this.tagInput) this.tagInput.nativeElement.value = '';
+    this.tagInput!.nativeElement.value = '';
     this.tagCtrl.setValue(null)
   }
 
