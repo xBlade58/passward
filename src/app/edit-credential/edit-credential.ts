@@ -105,7 +105,6 @@ export class EditCredential {
   }
 
   private _filter(value:string): string[] {
-    console.log("Value to filter: " + value)
     const filterValue = value.toLowerCase()
     return this.availableTags.filter(tag => tag.toLowerCase().includes(filterValue))
   }

@@ -1,34 +1,44 @@
 [
     {
-        "id": "afe4b6df-a878-4035-af50-8690d541aa9e",
+        "id": "6836db0d-a69d-4bbf-ade7-0664fb4b270b",
         "title": "Netflix",
-        "username": "jakob",
-        "password": "nfsu",
-        "url": "netflix.com",
+        "username": "Jakob Feistenauer",
+        "password": "nbjo",
+        "url": "https://netflix.com",
         "tags": [
-            "Streaming",
-            "Entertainment",
-            "Activity"
+            "Streaming"
         ]
     },
     {
-        "id": "7141b943-505b-4063-92f3-d05cef59832b",
-        "title": "Spotify",
-        "username": "mer",
-        "password": "qbtt",
-        "url": "spot.com",
-        "tags": []
+        "id": "fa7eb6fe-8861-425c-9642-8bbf6dbb64d1",
+        "title": "Amazon",
+        "username": "mert58",
+        "password": "uftuLMN",
+        "url": "https://amazon.com",
+        "tags": [
+            "Shopping",
+            "Streaming"
+        ]
     },
     {
-        "id": "23985983-ee5a-4d45-af2c-3a802041fcba",
-        "title": "FHV",
-        "username": "mert",
-        "password": "pnf",
-        "url": "fhv.at",
+        "id": "c8c8d2f9-f4d4-4e0d-a1ce-a48d0c1ba1bb",
+        "title": "Spotify",
+        "username": "Jaypan",
+        "password": "kbz",
+        "url": "https://spotify.com",
         "tags": [
             "Streaming",
-            "Entertainment",
-            "University"
+            "Music"
+        ]
+    },
+    {
+        "id": "f2ffb3f9-40ca-4e29-b4f5-14a87df62d17",
+        "title": "LoL",
+        "username": "mert",
+        "password": "kbz",
+        "url": "LeagueOfLegends.de",
+        "tags": [
+            "Games"
         ]
     }
 ]

@@ -69,8 +69,7 @@ export class TablePassword {
       //if no term inserted
       if(filter === 'empty'){
         if(this.selectedChips.length === 0) return true;
-        //return checkForTags(this.selectedChips, data.tag)
-        return true
+        return checkForTags(this.selectedChips, data.tags)
       }
 
       const matchFilter = []
@@ -90,8 +89,7 @@ export class TablePassword {
       if(this.selectedChips.length === 0) {
         return matchStrings
       }
-      //return checkForTags(this.selectedChips, data.tag) && matchStrings;
-      return true
+      return checkForTags(this.selectedChips, data.tags) && matchStrings;
     }
   }
 
@@ -117,8 +115,9 @@ export class TablePassword {
 
 }
 
-function checkForTags(selectedChips: string[], tag: string) {
-  return selectedChips.includes(tag)
+function checkForTags(selectedChips: string[], credTags: string[]) {
+  const hasTag = credTags.some(t => selectedChips.includes(t))
+  return hasTag
 }
 
 function extractTags(data: Credential[]): Set<string>{
