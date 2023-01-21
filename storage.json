@@ -1,26 +1,34 @@
 [
     {
-        "id": "179a5e38-6c36-4bb4-ab72-f390c81b1bee",
+        "id": "afe4b6df-a878-4035-af50-8690d541aa9e",
         "title": "Netflix",
-        "username": "mert",
+        "username": "jakob",
         "password": "nfsu",
         "url": "netflix.com",
-        "tag": "Streaming"
+        "tags": [
+            "Streaming",
+            "Entertainment",
+            "Activity"
+        ]
     },
     {
-        "id": "7199e1ce-bea4-48d7-ae54-fae77d385aca",
-        "title": "LoL",
-        "username": "mert",
-        "password": "nfsu",
-        "url": "lol.com",
-        "tag": "Games"
+        "id": "7141b943-505b-4063-92f3-d05cef59832b",
+        "title": "Spotify",
+        "username": "mer",
+        "password": "qbtt",
+        "url": "spot.com",
+        "tags": []
     },
     {
-        "id": "4e355c7e-d739-4a27-abd5-2b58251b0bc3",
-        "title": "Amazon",
+        "id": "23985983-ee5a-4d45-af2c-3a802041fcba",
+        "title": "FHV",
         "username": "mert",
-        "password": "nfsu",
-        "url": "amazon.com",
-        "tag": "Streaming"
+        "password": "pnf",
+        "url": "fhv.at",
+        "tags": [
+            "Streaming",
+            "Entertainment",
+            "University"
+        ]
     }
 ]

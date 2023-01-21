@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Password } from '../create-credential/Password';
+import { Credential } from '../@types/Credential';
 import { FileSystemService } from '../filesystem.service';
 
 
@@ -12,12 +12,10 @@ import { FileSystemService } from '../filesystem.service';
   templateUrl: 'table-passwords.html'
 })
 export class TablePassword {
-  displayedColumns=['title', 'username', 'url', 'tag'];
-  dataSource: MatTableDataSource<Password>;
+  displayedColumns=['title', 'username', 'url', 'tags'];
+  dataSource: MatTableDataSource<Credential>;
   selectedChips: string[] = [];
-  tags= ['music', 'Games', 'Streaming', 'Entertainment'];
-  currView: string = 'main';
-  isMain: boolean = true
+  availableTags: string[] = []
   currSearchFilter: string = '';
 
   @ViewChild(MatSort)
@@ -26,7 +24,7 @@ export class TablePassword {
 
 
   constructor(private fsService: FileSystemService, private router: Router) {
-    const passwords: Password[] = []
+    const passwords: Credential[] = []
     this.dataSource=new MatTableDataSource(passwords);
     this.dataSource.filterPredicate = this.getFilterPredicate();
     this.loadCredentials();
@@ -66,12 +64,13 @@ export class TablePassword {
     }
   }
   getFilterPredicate(){
-    return (data: Password, filter: string) => {
+    return (data: Credential, filter: string) => {
       
       //if no term inserted
       if(filter === 'empty'){
         if(this.selectedChips.length === 0) return true;
-        return checkForTags(this.selectedChips, data.tag)
+        //return checkForTags(this.selectedChips, data.tag)
+        return true
       }
 
       const matchFilter = []
@@ -91,29 +90,46 @@ export class TablePassword {
       if(this.selectedChips.length === 0) {
         return matchStrings
       }
-      return checkForTags(this.selectedChips, data.tag) && matchStrings;
+      //return checkForTags(this.selectedChips, data.tag) && matchStrings;
+      return true
     }
   }
 
   loadCredentials() {
-    this.fsService.loadCrendentials().then((data: Password[]) => {
+    this.fsService.loadCrendentials().then((data: Credential[]) => {
+      this.availableTags = Array.from(extractTags(data));
       this.dataSource.data = data;
     })
   }
 
   showCreateForm() {
-    this.router.navigate(['/create-credential']);
+    this.router.navigate(['/create-credential'], {
+      state: {data: {tags: this.availableTags}}
+    });
   }
 
-  editCred(row: Password){
-      this.router.navigate(['/edit-credential'], {state:
-        {data: {id: row.id, title: row.title, username: row.username, url: row.url, tag: row.tag}
-      }});
+  editCred(row: Credential){
+    this.router.navigate(['/edit-credential'], {state:
+      {data: {id: row.id, title: row.title, username: row.username, url: row.url, tags: row.tags, avTags: this.availableTags}
+    }});
   }
 
 
 }
+
 function checkForTags(selectedChips: string[], tag: string) {
   return selectedChips.includes(tag)
 }
+
+function extractTags(data: Credential[]): Set<string>{
+  let setOfTags = new Set<string>();
+  Array.prototype.forEach.call(data, cred => {
+    for(let i = 0; i < cred.tags.length; i++){
+      setOfTags.add(cred.tags[i])
+    }
+  })
+  return setOfTags
+}
+
+
 

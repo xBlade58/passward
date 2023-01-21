@@ -1,8 +1,9 @@
-export interface Password {
+
+export interface Credential {
   id: string,
   title: string;
   username: string;
   password: string
   url: string;
-  tag: string
+  tags: string[]
 }

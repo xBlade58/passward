@@ -1,6 +1,8 @@
+import { Credential } from "./Credential"
+
 export interface IElectronAPI {
-  saveCredential: (data:any) => Promise<void>,
-  editCredential: (toUpdate:any) => Promise<void>,
+  saveCredential: (data:Credential) => Promise<void>,
+  editCredential: (toUpdate:Credential) => Promise<void>,
   loadCredentials: () => Promise<any>,
   loadPasswordById: (id:string) => Promise<string>
  }
