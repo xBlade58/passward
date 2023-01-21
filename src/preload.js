@@ -4,6 +4,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   loadCredentials: () => ipcRenderer.invoke('storage:fetchAll'),
   loadPasswordById: (id) => ipcRenderer.invoke('storage:fetchPasswordById', id),
   saveCredential: (data) => ipcRenderer.invoke('storage:saveCredential', data),
-  editCredential: (toUpdate) => ipcRenderer.invoke('storage:editCredential', toUpdate)
-  
+  editCredential: (toUpdate) => ipcRenderer.invoke('storage:editCredential', toUpdate),
+  deleteCredentialById: (id) => ipcRenderer.invoke('storage:deleteCredentialById', id) 
 })

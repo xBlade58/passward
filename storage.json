@@ -1,34 +1,44 @@
 [
     {
-        "id": "b217ea30-bb57-4645-a359-b6a258e03007",
-        "title": "jakob",
-        "username": "jakob",
-        "password": "kblpc",
-        "url": "jakob",
-        "tag": "jakob"
+        "id": "6836db0d-a69d-4bbf-ade7-0664fb4b270b",
+        "title": "Netflix",
+        "username": "Jakob Feistenauer",
+        "password": "nbjo",
+        "url": "https://netflix.com",
+        "tags": [
+            "Streaming"
+        ]
     },
     {
-        "id": "3708e00c-617d-41d3-b433-adee5a93020f",
-        "title": "h",
-        "username": "h",
-        "password": "i",
-        "url": "h",
-        "tag": "h"
+        "id": "fa7eb6fe-8861-425c-9642-8bbf6dbb64d1",
+        "title": "Amazon",
+        "username": "mert58",
+        "password": "uftuLMN",
+        "url": "https://amazon.com",
+        "tags": [
+            "Shopping",
+            "Streaming"
+        ]
     },
     {
-        "id": "3c64206e-dbe9-4215-8169-caa6b94c59f4",
-        "title": "everything",
-        "username": "everything",
-        "password": "fwfszuijoh",
-        "url": "everything",
-        "tag": "everything"
+        "id": "c8c8d2f9-f4d4-4e0d-a1ce-a48d0c1ba1bb",
+        "title": "Spotify",
+        "username": "Jaypan",
+        "password": "kbz",
+        "url": "https://spotify.com",
+        "tags": [
+            "Streaming",
+            "Music"
+        ]
     },
     {
-        "id": "1772c536-2ea5-4d16-a282-03e4303ff8c2",
-        "title": "",
-        "username": "",
-        "password": "",
-        "url": "",
-        "tag": ""
+        "id": "f2ffb3f9-40ca-4e29-b4f5-14a87df62d17",
+        "title": "LoL",
+        "username": "mert",
+        "password": "kbz",
+        "url": "LeagueOfLegends.de",
+        "tags": [
+            "Games"
+        ]
     }
 ]
