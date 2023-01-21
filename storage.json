@@ -1,10 +1,44 @@
 [
     {
-        "id": "94e18905-e3e5-4528-9370-f7228ca234e5",
+        "id": "6836db0d-a69d-4bbf-ade7-0664fb4b270b",
         "title": "Netflix",
-        "username": "movieManica2",
-        "password": "ofugmjytvyyt",
-        "url": "netflix.com",
-        "tag": "Film"
+        "username": "Jakob Feistenauer",
+        "password": "nbjo",
+        "url": "https://netflix.com",
+        "tags": [
+            "Streaming"
+        ]
+    },
+    {
+        "id": "fa7eb6fe-8861-425c-9642-8bbf6dbb64d1",
+        "title": "Amazon",
+        "username": "mert58",
+        "password": "uftuLMN",
+        "url": "https://amazon.com",
+        "tags": [
+            "Shopping",
+            "Streaming"
+        ]
+    },
+    {
+        "id": "c8c8d2f9-f4d4-4e0d-a1ce-a48d0c1ba1bb",
+        "title": "Spotify",
+        "username": "Jaypan",
+        "password": "kbz",
+        "url": "https://spotify.com",
+        "tags": [
+            "Streaming",
+            "Music"
+        ]
+    },
+    {
+        "id": "f2ffb3f9-40ca-4e29-b4f5-14a87df62d17",
+        "title": "LoL",
+        "username": "mert",
+        "password": "kbz",
+        "url": "LeagueOfLegends.de",
+        "tags": [
+            "Games"
+        ]
     }
 ]

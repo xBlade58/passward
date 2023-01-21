@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule }  from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon'
 import { CreateCredential } from './create-credential/create-credential';
+import {MatAutocompleteModule} from '@angular/material/autocomplete'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CreateCredential } from './create-credential/create-credential';
     MatIconModule,
     FormsModule,
     MatProgressSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatFormFieldModule,
