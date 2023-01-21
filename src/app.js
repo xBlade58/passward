@@ -38,6 +38,7 @@ app.on('ready', () => {
   ipcMain.handle('storage:fetchPasswordById', handlePasswordById);
   ipcMain.handle('storage:saveCredential', handleSaveCredential);
   ipcMain.handle('storage:editCredential', handleEditCredential);
+  ipcMain.handle('storage:deleteCredentialById', handleDeleteCredentialById);
   createWindow()
 })
 
@@ -90,6 +91,16 @@ async function handleEditCredential(event, updatedData) {
       break
     }
   }
+  writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
+    if(err) throw err
+  })
+}
+
+async function handleDeleteCredentialById(event, id) {
+  var creds = await readFile('storage.json')
+  var jsArr = JSON.parse(creds);
+  jsArr = jsArr.filter(item => item.id !== id)
+  
   writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
     if(err) throw err
   })
