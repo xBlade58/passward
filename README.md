@@ -1,30 +1,30 @@
+
+* Introduction (electron version usw.)
+* How to start (+ node Version 18.30)
+* How to execute Tests
+* Basic Features/routings
+
 # PassWard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
+## Introduction
+PassWard is a simple Desktop Web App for managing and storing credentials. It was developed using Angular (15.0.2) together with Electron (22.0.0).
 
-## Development server
+## Basic Functionality
+In summary, the following features are implemented:
+* create, edit and delete a credential
+* assign or remove tags while creating/editing credentials
+* search for any keyword or filter by multiple tags
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The credentials are stored in a [storage.json](src/storage.json), which is prefilled with test data. For encryption and decryption of passwords, we developed a custom, native Node module called [passwardcrypto](passwardcrypto/addon.cc), written in C++. The encryption itself is done using the Caesar cipher. 
 
-## Code scaffolding
+## How to start the app
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+### On Windows
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### On Mac
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-## To run tests
+## How to run tests
 Run `npx playwright test`
+
+## Further Notes

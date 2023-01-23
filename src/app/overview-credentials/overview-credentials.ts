@@ -7,12 +7,12 @@ import { FileSystemService } from '../filesystem.service';
 
 
 @Component({
-  selector: 'table-passwords',
-  styleUrls: ['table-passwords.css'],
-  templateUrl: 'table-passwords.html'
+  selector: 'overview-credentials',
+  styleUrls: ['overview-credentials.css'],
+  templateUrl: 'overview-credentials.html'
 })
-export class TablePassword {
-  displayedColumns=['title', 'username', 'url', 'tags'];
+export class OverviewCredentials {
+  displayedColumns = ['title', 'username', 'url', 'tags'];
   dataSource: MatTableDataSource<Credential>;
   selectedChips: string[] = [];
   availableTags: string[] = []
@@ -21,11 +21,9 @@ export class TablePassword {
   @ViewChild(MatSort)
   sort: MatSort = new MatSort;
 
-
-
   constructor(private fsService: FileSystemService, private router: Router) {
-    const passwords: Credential[] = []
-    this.dataSource=new MatTableDataSource(passwords);
+    const credentials: Credential[] = []
+    this.dataSource = new MatTableDataSource(credentials);
     this.dataSource.filterPredicate = this.getFilterPredicate();
     this.loadCredentials();
 
@@ -34,19 +32,19 @@ export class TablePassword {
 
 
   ngAfterViewInit() {
-    this.dataSource.sort=this.sort;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: KeyboardEvent) {
 
-    if(event.target != null){
+    if (event.target != null) {
       const nTarget = event.target as HTMLInputElement;
-      this.currSearchFilter= nTarget.value;
+      this.currSearchFilter = nTarget.value;
       this.filterByStringAndTag();
     }
   }
 
-  changeSelected(chip: string){
+  changeSelected(chip: string) {
     const index = this.selectedChips.indexOf(chip);
     if (index >= 0) {
       this.selectedChips.splice(index, 1);
@@ -57,18 +55,18 @@ export class TablePassword {
   }
 
   filterByStringAndTag() {
-    if(this.currSearchFilter === '') {
-        this.dataSource.filter = 'empty'
+    if (this.currSearchFilter === '') {
+      this.dataSource.filter = 'empty'
     } else {
       this.dataSource.filter = this.currSearchFilter
     }
   }
-  getFilterPredicate(){
+  getFilterPredicate() {
     return (data: Credential, filter: string) => {
-      
+
       //if no term inserted
-      if(filter === 'empty'){
-        if(this.selectedChips.length === 0) return true;
+      if (filter === 'empty') {
+        if (this.selectedChips.length === 0) return true;
         return checkForTags(this.selectedChips, data.tags)
       }
 
@@ -83,10 +81,10 @@ export class TablePassword {
       const matchUrl = colUrl.toLowerCase().startsWith(filter.toLowerCase())
 
       matchFilter.push(matchTitle, matchUsername, matchUrl);
-      const matchStrings = matchFilter.some((el)=> el == true);
+      const matchStrings = matchFilter.some((el) => el == true);
 
       //if key term but no tags
-      if(this.selectedChips.length === 0) {
+      if (this.selectedChips.length === 0) {
         return matchStrings
       }
       return checkForTags(this.selectedChips, data.tags) && matchStrings;
@@ -102,14 +100,17 @@ export class TablePassword {
 
   showCreateForm() {
     this.router.navigate(['/create-credential'], {
-      state: {data: {tags: this.availableTags}}
+      state: { data: { tags: this.availableTags } }
     });
   }
 
-  editCred(row: Credential){
-    this.router.navigate(['/edit-credential'], {state:
-      {data: {id: row.id, title: row.title, username: row.username, url: row.url, tags: row.tags, avTags: this.availableTags}
-    }});
+  editCred(row: Credential) {
+    this.router.navigate(['/edit-credential'], {
+      state:
+      {
+        data: { id: row.id, title: row.title, username: row.username, url: row.url, tags: row.tags, avTags: this.availableTags }
+      }
+    });
   }
 
 
@@ -120,10 +121,10 @@ function checkForTags(selectedChips: string[], credTags: string[]) {
   return hasTag
 }
 
-function extractTags(data: Credential[]): Set<string>{
+function extractTags(data: Credential[]): Set<string> {
   let setOfTags = new Set<string>();
   Array.prototype.forEach.call(data, cred => {
-    for(let i = 0; i < cred.tags.length; i++){
+    for (let i = 0; i < cred.tags.length; i++) {
       setOfTags.add(cred.tags[i])
     }
   })

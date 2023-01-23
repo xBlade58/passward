@@ -27,7 +27,7 @@ test('render first page', async () => {
   expect(title).toBe("PassWard")
 })
 
-test('click the button to open new window', async () => {
+test('click the button to open create credential page', async () => {
   const button = await page.waitForSelector('*css=button >> text=Create');
   await button.click();
   const newPage = await electronApp.firstWindow();

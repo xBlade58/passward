@@ -1,28 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatGridListModule } from '@angular/material/grid-list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import {MatToolbarModule} from '@angular/material/toolbar'
+import { MatButtonModule } from '@angular/material/button'
 
-import { TablePassword } from './table-passwords/table-passwords';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// Custom Components
+import { OverviewCredentials } from './overview-credentials/overview-credentials';
+import { CreateCredential } from './create-credential/create-credential';
 import { EditCredential } from './edit-credential/edit-credential';
 
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
-import {MatSortModule} from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatChipsModule }  from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon'
-import { CreateCredential } from './create-credential/create-credential';
-import {MatAutocompleteModule} from '@angular/material/autocomplete'
 
 @NgModule({
   declarations: [
-    AppComponent, TablePassword, CreateCredential, EditCredential
+    AppComponent, OverviewCredentials, CreateCredential, EditCredential
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete'
     FormsModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   exports: [
     MatFormFieldModule,
