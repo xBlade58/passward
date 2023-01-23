@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng build --base-href ./ && electron .",
     "build": "ng build",
-    "test": "ng test",
+    "test": "npx playwright test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -38,6 +38,7 @@
     "@types/jasmine": "~4.3.0",
     "@types/uuid": "^9.0.0",
     "electron": "^22.0.0",
+    "electron-playwright-helpers": "^1.4.1",
     "electron-rebuild": "^3.2.9",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",

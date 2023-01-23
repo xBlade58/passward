@@ -1,28 +1,22 @@
 import { ElectronApplication, Page, _electron as electron } from 'playwright'
 import { test, expect } from '@playwright/test'
+import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
 
 let electronApp : ElectronApplication
 let page : Page
 
 test.beforeAll(async () => {
-  electronApp = await electron.launch({ args: ['./src/app.js'] });
-  // Evaluation expression in the Electron context.
-  const appPath = await electronApp.evaluate(async ({ app }) => {
-  // This runs in the main Electron process, parameter here is always
-  // the result of the require('electron') in the main app script.
-  return app.getAppPath();
-  });
-  console.log(appPath);  
+  electronApp = await electron.launch({ args: ['./src/app.js'] }); 
   })
 
 test.afterAll(async () => {
   await electronApp.close()
   })
 
+//E2E UI Tests
+
 test('render first page', async () => {
-  // Get the first window that the app opens, wait if necessary.
   page = await electronApp.firstWindow();
-  // Print the title.
   const title = await page.title()
   expect(title).toBe("PassWard")
 })
@@ -40,4 +34,24 @@ test('check if on create page', async () => {
   const text = await page.$eval('h1', (el) => el.textContent)
   console.log(text)
   expect(text).toBe("Create Credential")
+})
+
+//IPC E2E Tests
+
+var obj = {
+  id: "Test-ID",
+  title: "Test-Titel",
+  username: "Test-UserName",
+  password: "TestPassword"
+}
+
+test('test save Credential', async () => {
+  await ipcMainInvokeHandler(electronApp, 'storage:saveCredential', obj)
+  const result = await ipcMainInvokeHandler(electronApp, 'storage:fetchPasswordById', obj.id)
+  expect(result).toBe("TestPassword")
+})
+
+test('test delete Credential', async () => {
+  const result = await ipcMainInvokeHandler(electronApp, 'storage:deleteCredentialById', obj.id)
+  expect(result).toBe(undefined)
 })
