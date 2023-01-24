@@ -7,6 +7,7 @@ const util = require("util");
 const readFile  = util.promisify(fs.readFile)
 const writeFile = util.promisify(fs.writeFile)
 
+const storagePath = './src/storage.json'
 let mainWindow
 
 function createWindow () {
@@ -26,7 +27,6 @@ function createWindow () {
       slashes: true
     })
   );
-  mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -53,11 +53,11 @@ app.on('activate', function () {
 async function handleSaveCredential(event, obj) {
   if(obj){
     obj.password = encrypt(obj.password)
-    var credentials = await readFile('storage.json')
+    var credentials = await readFile(storagePath)
     var jsArr = JSON.parse(credentials)
     jsArr.push(obj)
 
-    writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err) {
+    writeFile(storagePath, JSON.stringify(jsArr, null, 4), function (err) {
       if(err) console.err(err)
     })
 
@@ -65,13 +65,13 @@ async function handleSaveCredential(event, obj) {
 }
 
 async function handleFetchAll(){
-  const creds =  await readFile('storage.json')
+  const creds =  await readFile(storagePath)
   const jsArr = JSON.parse(creds)
   return jsArr;
 }
 
 async function handlePasswordById(event, id) {
-  var creds = await readFile('storage.json')
+  var creds = await readFile(storagePath)
   var jsArr = JSON.parse(creds);
   const result = jsArr.filter(obj => obj.id == id)
   if(result.length == 1) {
@@ -82,7 +82,7 @@ async function handlePasswordById(event, id) {
 }
 
 async function handleEditCredential(event, updatedData) {
-  var creds = await readFile('storage.json')
+  var creds = await readFile(storagePath)
   var jsArr = JSON.parse(creds);
   for(var i = 0; i < jsArr.length; i++){
     if(jsArr[i].id === updatedData.id){
@@ -91,17 +91,17 @@ async function handleEditCredential(event, updatedData) {
       break
     }
   }
-  writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
+  writeFile(storagePath, JSON.stringify(jsArr, null, 4), function (err){
     if(err) throw err
   })
 }
 
 async function handleDeleteCredentialById(event, id) {
-  var creds = await readFile('storage.json')
+  var creds = await readFile(storagePath)
   var jsArr = JSON.parse(creds);
   jsArr = jsArr.filter(item => item.id !== id)
   
-  writeFile('storage.json', JSON.stringify(jsArr, null, 4), function (err){
+  writeFile(storagePath, JSON.stringify(jsArr, null, 4), function (err){
     if(err) throw err
   })
 }
