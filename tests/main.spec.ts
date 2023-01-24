@@ -22,7 +22,7 @@ test('render first page', async () => {
 })
 
 test('click the button to open create credential page', async () => {
-  const button = await page.waitForSelector('*css=button >> text=Create');
+  const button = await page.waitForSelector('*css=button >> text=Create Credential');
   await button.click();
   const newPage = await electronApp.firstWindow();
   expect(newPage).toBeTruthy()
@@ -30,8 +30,8 @@ test('click the button to open create credential page', async () => {
 })
 
 test('check if on create page', async () => {
-  await page.waitForSelector('h1')
-  const text = await page.$eval('h1', (el) => el.textContent)
+  await page.waitForSelector('h2')
+  const text = await page.$eval('h2', (el) => el.textContent)
   console.log(text)
   expect(text).toBe("Create Credential")
 })
