@@ -20,12 +20,11 @@ For Windows, do the following:
 1. Install Node.js 18 (we used 18.30.0).
 2. Install one of the following Python versions: v3.7, v3.8, v3.9 v3.10.
 3. Install C++ Build Environment: Visual Studio ("Desktop Development with C++" workload) *or* Visaul Studio Build Tools (with "Visual C++ build tools" workload).
-4. 
-5. Run `npm install -g node-gyp`.
-6. Navigate to root directory of the project and run `npm install`. This should create a `./passwardcrypto/build` folder.
-7. If no such subfolder is created, navigate to `./passwardcrypto` and run `node-gyp configure` and `node-gyp build`. Then run `npm install` on the root folder.
-8. As Electron has a different application binary interface form a given Node.js binary, native modules need to be recompiled for Electron. Therefore, you need to run `.\node_modules\.bin\electron-rebuild.cmd` (in the root folder).
-9. Run `npm start`. This should open the app.
+4. Run `npm install -g node-gyp`.
+5. Navigate to root directory of the project and run `npm install`. This should create a `./passwardcrypto/build` folder.
+6. If no such subfolder is created, navigate to `./passwardcrypto` and run `node-gyp configure` and `node-gyp build`. Then run `npm install` on the root folder.
+7. As Electron has a different application binary interface form a given Node.js binary, native modules need to be recompiled for Electron. Therefore, you need to run `.\node_modules\.bin\electron-rebuild.cmd` (in the root folder).
+8. Run `npm start`. This should open the app.
 
 
 ### On Mac
