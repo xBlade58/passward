@@ -18,11 +18,14 @@ Starting the app is basically the same for all platforms. But depending on the p
 For Windows, do the following:
 
 1. Install Node.js 18 (we used 18.30.0).
-2. Install one of the following Python versions: v3.7, v3.8, v3.9 v3.10
-3. Install C++ Build Environment: Visual Studio ("Desktop Development with C++" workload) *or* Visaul Studio Build Tools (with "Visual C++ build tools" workload)
-4. Navigate to root directory of the project and run `npm install`. This should create a `./passwardcrypto/build` folder.
-5. As Electron has a different application binary interface form a given Node.js binary, native modules need to be recompiled for Electron. Therefore, you need to run `./node_modules/.bin/electron-rebuild`.
-6. Run `npm run start`. This should open the app.
+2. Install one of the following Python versions: v3.7, v3.8, v3.9 v3.10.
+3. Install C++ Build Environment: Visual Studio ("Desktop Development with C++" workload) *or* Visaul Studio Build Tools (with "Visual C++ build tools" workload).
+4. 
+5. Run `npm install -g node-gyp`.
+6. Navigate to root directory of the project and run `npm install`. This should create a `./passwardcrypto/build` folder.
+7. If no such subfolder is created, navigate to `./passwardcrypto` and run `node-gyp configure` and `node-gyp build`. Then run `npm install` on the root folder.
+8. As Electron has a different application binary interface form a given Node.js binary, native modules need to be recompiled for Electron. Therefore, you need to run `.\node_modules\.bin\electron-rebuild.cmd` (in the root folder).
+9. Run `npm start`. This should open the app.
 
 
 ### On Mac
@@ -30,14 +33,20 @@ For macOS, do the following:
 
 1. Install Node.js 18 (we used 18.30.0).
 2. Install one of the following Python versions: v3.7, v3.8, v3.9, v3.10
-3. Install XCode Command Line Tools, which will install `clang`, `clang++` and `make`. The steps for this may vary depending on whether you have a full installation of XCode or not.
-4. Navigate to root directory of the project and run `npm install`. This should create a `./passwardcrypto/build` folder.
-5. As Electron has a different application binary interface from a given Node.js binary, native modules need to be recompiled for Electron. Therefore, you need to run `./node_modules/.bin/electron-rebuild`.
-6. Run `npm run start`. This should open the app.
+3. Install XCode Command Line Tools, which will install `clang`, `clang++` and `make`. 
+   1. Install the XCode Command Line Tools standalone by running xcode-select --install. -- OR --
+   2. Alternatively, if you already have the full Xcode installed, you can install the Command Line Tools under the menu Xcode -> Open Developer Tool -> More Developer Tools....
+4. Run `npm install -g node-gyp`.
+5. Navigate to root directory of the project and run `npm install`. This should create a `./passwardcrypto/build` folder.
+6. If no such subfolder is created, navigate to `./passwardcrypto` and run `node-gyp configure` and `node-gyp build`. Then run `npm install` on the root folder.
+7. As Electron has a different application binary interface form a given Node.js binary, native modules need to be recompiled for Electron. Therefore, you need to run `.\node_modules\.bin\electron-rebuild.cmd` (in the root folder).
+8. Run `npm start`. This should open the app.
 
 If you experience any problems installing node-gyp, please visit https://www.npmjs.com/package/node-gyp (especially if your macOS Catalina is equal to or higher than 10.15).
 
 ## How to run Tests
+In order to run some UI tests as well as Integration tests for inter-process calls, just execute `npm test`.
+The test can be found under [./tests](tests/main.spec.ts). We only tested the Electron part of our application.
 
 
 ## Further Notes

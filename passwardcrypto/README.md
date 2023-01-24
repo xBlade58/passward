@@ -1,5 +1,3 @@
-### Init
-npm init
 
 npm install nan bindings
 

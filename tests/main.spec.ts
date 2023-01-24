@@ -36,7 +36,7 @@ test('check if on create page', async () => {
   expect(text).toBe("Create Credential")
 })
 
-//IPC E2E Tests
+//Integration Tests
 
 var obj = {
   id: "Test-ID",
