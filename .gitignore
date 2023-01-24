@@ -1,9 +1,7 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.storage.json
 
-# Specific for our App
+# Specific for the app
 /**/build
 /**/bin
-storage.json
 
 # Compiled output
 /dist

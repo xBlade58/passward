@@ -1,30 +1,48 @@
 # PassWard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.2.
+## Introduction
+PassWard is a simple Desktop Web App for managing and storing credentials. It was developed using Angular (15.0.2) together with Electron (22.0.0).
 
-## Development server
+## Basic Features
+In summary, the following features are implemented:
+* create, edit and delete a credential
+* assign or remove tags while creating/editing credentials
+* search for any keyword or filter by multiple tags
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The credentials are stored in a [storage.json](src/storage.json), which is prefilled with test data. For encryption and decryption of passwords, we developed a custom, native Node module called [passwardcrypto](passwardcrypto/addon.cc), written in C++. The encryption itself is done using the Caesar cipher. 
 
-## Code scaffolding
+## How to start the App
+Starting the app is basically the same for all platforms. But depending on the platform, the prerequisites vary, especially due to the build of the C++ module, which was created using [node-gyp](https://www.npmjs.com/package/node-gyp).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### On Windows
+For Windows, do the following:
 
-## Build
+1. Install Node.js 18 (we used 18.30.0).
+2. Install one of the following Python versions: v3.7, v3.8, v3.9 v3.10
+3. Install C++ Build Environment: Visual Studio ("Desktop Development with C++" workload) *or* Visaul Studio Build Tools (with "Visual C++ build tools" workload)
+4. Navigate to root directory of the project and run `npm install`. This should create a `./passwardcrypto/build` folder.
+5. As Electron has a different application binary interface form a given Node.js binary, native modules need to be recompiled for Electron. Therefore, you need to run `./node_modules/.bin/electron-rebuild`.
+6. Run `npm run start`. This should open the app.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+### On Mac
+For macOS, do the following:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Install Node.js 18 (we used 18.30.0).
+2. Install one of the following Python versions: v3.7, v3.8, v3.9, v3.10
+3. Install XCode Command Line Tools, which will install `clang`, `clang++` and `make`. The steps for this may vary depending on whether you have a full installation of XCode or not.
+4. Navigate to root directory of the project and run `npm install`. This should create a `./passwardcrypto/build` folder.
+5. As Electron has a different application binary interface from a given Node.js binary, native modules need to be recompiled for Electron. Therefore, you need to run `./node_modules/.bin/electron-rebuild`.
+6. Run `npm run start`. This should open the app.
 
-## Running end-to-end tests
+If you experience any problems installing node-gyp, please visit https://www.npmjs.com/package/node-gyp (especially if your macOS Catalina is equal to or higher than 10.15).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## How to run Tests
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Further Notes
+Some points worth mentioning:
 
-## To run tests
-Run `npx playwright test`
+* There is a small ["bug"](https://github.com/angular/components/issues/13574) in the [Angular implementation](https://material.angular.io/components/chips/overview#chips-autocomplete) regarding the input field for creating Chips (Tags) together with autocomplete. When adding a Tag while creating a credential, you can search first look at existing Tags. For example, if you type "St" and then select "Streaming" as the Tag, both "St" and "Streaming" will be added into the field. Workarounds for this issue didn't work, so we didn't want to waste much time solving it.
+* We didn't prioritize form validation, empty fields may be saved.
+* We didn't prioritize designing a pretty or proper UI.
