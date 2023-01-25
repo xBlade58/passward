@@ -17,7 +17,7 @@ Starting the app is basically the same for all platforms. But depending on the p
 ### On Windows
 For Windows, do the following:
 
-1. Install Node.js 18 (we used 18.30.0).
+1. Install Node.js 18 (we used 18.13.0).
 2. Install one of the following Python versions: v3.7, v3.8, v3.9 v3.10.
 3. Install C++ Build Environment: Visual Studio ("Desktop Development with C++" workload) *or* Visaul Studio Build Tools (with "Visual C++ build tools" workload).
 4. Run `npm install -g node-gyp`.
